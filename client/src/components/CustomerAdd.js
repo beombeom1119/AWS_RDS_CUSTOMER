@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React from 'react';
 import { post } from 'axios';
 
 class CustomerAdd extends React.Component {
@@ -31,12 +31,21 @@ class CustomerAdd extends React.Component {
             .then((response) => {
                 console.log("!____________"+response.data);
             })
+            this.setState({
+                file:null,
+                userName:"",
+                birthday:"",
+                gender:"",
+                job:"",
+                filename:""  
+            })
+            window.location.reload();
     }
 
 handleFileChange=(e) => {
          this.setState({
             file : e.target.files[0],
-            fileName : e.target.value
+            filename : e.target.value
         })
     }
 
@@ -82,12 +91,11 @@ addCustomer=() => {
         return(
             <form onSubmit={this.handleFormSubmit} >
                 <h1>고객 추가</h1>
-                프로필이미지 : <input type ="file"  name="file" file={this.state.fileName} onChange={this.handleFileChange}/><br/> 
+                프로필이미지 : <input type ="file"  name="file" file={this.state.filename} onChange={this.handleFileChange}/><br/> 
                 이름 : <input type = "text" name = "userName" value={this.state.userName} onChange={this.handleValueChange}></input><br/>
                 생년월일 : <input type = "text" name="birthday" value={this.state.birthday}   onChange={this.handleValueChange}/><br/>
                 성별 : <input type = "text" name="gender" value={this.state.gender}   onChange={this.handleValueChange}/><br/>
                 직업 : <input type = "text" name="job" value={this.state.job}  onChange={this.handleValueChange}/><br/>
-                <input type="text"/>
                 <button type ="submit">추가하기</button>
             </form>
         )

@@ -8,6 +8,10 @@
 #database
 /database.json
 
+#upload
+/upload
+
+
 # testing
 /coverage
 
