@@ -41,10 +41,27 @@ class App extends Component{
 
 
 
-  state= {
-    customers:"",     //변경될 값이기 때문에 ""처리
-    completed: 0
+  constructor(props)     
+  {
+    super(props);
+    this.state={
+      customers:'',
+      completed:0
+    }
   }
+
+  stateRefresh= () => {           //state 초기화 
+    this.setState(
+      {
+        customers:'',
+        completed:0
+      });
+      this.callApi().then(res=> this.setState({customers:res})) 
+      .catch(err=> console.log(err));
+
+  }
+
+
   
   componentDidMount() {
     this.timer = setInterval(this.progress,20);
@@ -88,7 +105,7 @@ class App extends Component{
           <CircularProgress className={classes.progress} variant="determinate" value ={this.state.completed}>
           </CircularProgress> </TableCell> </TableRow>
         } </TableBody> </Table> </Paper>
-      <CustomerAdd></CustomerAdd>
+      <CustomerAdd stateRefresh = {this.stateRefresh}></CustomerAdd>
       </div>
      
     );
