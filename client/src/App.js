@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import './App.css';
 import Customer from './components/Customer';
+import Header from './components/Header';
 import CustomerAdd from './components/CustomerAdd';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -70,6 +71,7 @@ class App extends Component{
     const {classes} =this.props;
     return(
       <div>
+        <Header/>
       <Paper className={classes.root}>
         <Table className={classes.table}>
         <TableHead>
