@@ -42,7 +42,7 @@ app.get('/api/customers',(req, res)=> {
 	app.post('/api/customers',upload.single('image'),(req,res)=> 
 	{
 		console.log("!!!");
-		let sql = "insert into CUSTOMER values (null,?,?,?,?,?)";
+		let sql = "insert into CUSTOMER values (null,?,?,?,?,?,now())";
 		let image ='/image/' + req.file.filename;
 		let name = req.body.name;
 		let birthday =req.body.birthday;
@@ -60,4 +60,18 @@ app.get('/api/customers',(req, res)=> {
 	)
 
 });
+
+
+app.delete('/api/customers/:id', (req,res) => {
+	let sql = 'DELETE FROM CUSTOMER WHERE id= ?';
+	let params = [req.params.id];
+	connection.query(sql,params,
+		(err,rows,fields) =>{
+		res.send(rows);
+	}
+	)
+});
+
+
+
 app.listen(port, ()=> console.log('잘 돌아갑니다!!!.'))
